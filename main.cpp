@@ -28,9 +28,8 @@ void selectionSort(int arr[], int arrSize){
     for(int i = 0 ; i< arrSize-1; i++){
         int min = i;
         for(int j = i+1; j<arrSize; j++){
-            if(arr[j] < arr[min]){
+            if(arr[j] < arr[min])
                 min = j;
-            }
         }
         arr[i] = arr[min];
 
@@ -67,6 +66,32 @@ void insertionSort(int arr[], int arrSize){
     std::cout<<"]"<<std::endl;
 }
 
+void shellShort(int arr[], int arrSize){
+    for(int gap = arrSize/2; gap > 0; gap/=2){
+        for(int j = gap; j < arrSize; j++){
+            for(int i = j - gap; i >= 0; i = i-gap){
+                if(arr[i+gap] > arr[i])
+                    break;
+                int tmp = arr[i+gap];
+                arr[i+gap] = arr[i];
+                arr[i] = tmp;
+            }
+        }
+    }
+
+    // Print
+    std::cout<<"Shell Sorted Array: [";
+    for(int i = 0; i< arrSize; i++){
+        if(i == arrSize-1){
+            std::cout<<arr[i];
+            break;
+        }
+        std::cout<<arr[i]<<",";
+    }
+    std::cout<<"]"<<std::endl;
+
+}
+
 int main() {
     int numArray[] = {2,4,19,20,1,5,3,50,55,12};
     int arraySize = sizeof(numArray)/sizeof(numArray[0]);
@@ -74,6 +99,7 @@ int main() {
     bubbleSort(numArray, arraySize);
     selectionSort(numArray, arraySize);
     insertionSort(numArray, arraySize);
+    shellShort(numArray, arraySize);
 
 
 
